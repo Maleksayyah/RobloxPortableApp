@@ -56,7 +56,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 30px;
+            gap: 28px;
             animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -80,8 +80,8 @@
         }
 
         .brand-icon {
-            width: 40px;
-            height: 40px;
+            width: 42px;
+            height: 42px;
             fill: var(--primary);
         }
 
@@ -143,6 +143,7 @@
             width: 18px;
             height: 18px;
             fill: currentColor;
+            flex-shrink: 0;
         }
 
         .btn-primary {
@@ -209,9 +210,9 @@
     <div class="launcher-card">
         <div class="brand">
             <div class="brand-icon-wrapper">
-                <!-- Inline Gamepad SVG -->
-                <svg class="brand-icon" viewBox="0 0 640 512">
-                    <path d="M192 64C86 64 0 150 0 256s86 192 192 192c48.4 0 92.8-18 127-47.8 3.5 3 7.3 5.7 11.2 8.2l48 32c12.3 8.2 28.5 7.1 39.5-2.7s14.8-25.5 9.2-38.6L400.4 336c19.9-23.7 31.6-54.3 31.6-88 0-106-86-192-192-192zM112 232h32v-32c0-8.8 7.2-16 16-16s16 7.2 16 16v32h32c8.8 0 16 7.2 16 16s-7.2 16-16 16h-32v32c0 8.8-7.2 16-16 16s-16-7.2-16-16v-32h-32c-8.8 0-16-7.2-16-16s7.2-16 16-16zm128 40a24 24 0 1 1 0-48 24 24 0 1 1 0 48zm48-64a24 24 0 1 1 0-48 24 24 0 1 1 0 48z"/>
+                <!-- Fixed Gamepad SVG -->
+                <svg class="brand-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H9v2H7v-2H5v-2h2V9h2v2h2v2zm4.5 1c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm3-3c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
                 </svg>
             </div>
             <h1>Roblox Launcher</h1>
@@ -223,16 +224,16 @@
 
         <div class="actions">
             <button id="startButton" class="btn btn-primary" onclick="launchGame()">
-                <!-- Inline Play SVG -->
-                <svg viewBox="0 0 384 512">
-                    <path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.2 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.3-23-41L73 39z"/>
+                <!-- Fixed Play SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"/>
                 </svg>
                 Launch Game
             </button>
             <button id="webButton" class="btn btn-secondary" onclick="openRobloxWebsite()">
-                <!-- Inline Globe SVG -->
-                <svg viewBox="0 0 512 512">
-                    <path d="M512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256zM256 48c-29.1 0-66.7 34.6-83.3 96h166.6c-16.6-61.4-54.2-96-83.3-96zM128 176c-8.1 24.7-12.8 51.7-13.6 80h283.2c-.8-28.3-5.5-55.3-13.6-80H128zm-13.6 112c.8 28.3 5.5 55.3 13.6 80h256.8c8.1-24.7 12.8-51.7 13.6-80H114.4z"/>
+                <!-- Fixed Globe SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
                 </svg>
                 Open Roblox Site
             </button>
@@ -265,8 +266,8 @@
 
                     btn.disabled = true;
                     btn.innerHTML = `
-                        <svg viewBox="0 0 512 512">
-                            <path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.7 .3-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 2L1 21h22L12 2zm1 14h-2v-2h2v2zm0-4h-2V8h2v4z"/>
                         </svg>
                         Not Found`;
                     
