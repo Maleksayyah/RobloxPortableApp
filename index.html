@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox Launcher</title>
+    <!-- FontAwesome for modern icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00a2ff;
+            --primary-glow: rgba(0, 162, 255, 0.4);
+            --bg-glass: rgba(18, 20, 29, 0.75);
+            --border-glass: rgba(255, 255, 255, 0.12);
+            --text-main: #ffffff;
+            --text-muted: #a0a5b5;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            user-select: none;
+        }
+
+        body {
+            /* Fallback gradient if background.png is missing */
+            background: linear-gradient(135deg, #090a0f 0%, #171b26 100%);
+            background-image: linear-gradient(rgba(10, 12, 18, 0.7), rgba(10, 12, 18, 0.85)), url('background.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Glassmorphism Central Card Container */
+        .launcher-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 40px 50px;
+            width: 90%;
+            max-width: 480px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+            animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Header & Logo styling */
+        .brand {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brand-icon {
+            font-size: 2.8rem;
+            color: var(--primary);
+            filter: drop-shadow(0 0 12px var(--primary-glow));
+            margin-bottom: 5px;
+        }
+
+        .brand h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #2ea44f;
+            box-shadow: 0 0 8px #2ea44f;
+        }
+
+        .status-dot.disabled {
+            background-color: #ea4e4e;
+            box-shadow: 0 0 8px #ea4e4e;
+        }
+
+        /* Action Buttons Grid */
+        .actions {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 12px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.25s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00a2ff 0%, #0066ff 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 20px var(--primary-glow);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0, 162, 255, 0.6);
+            filter: brightness(1.1);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-main);
+            border: 1px solid var(--border-glass);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .btn:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.3);
+            border: 1px solid transparent;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        /* Footer Credits */
+        .credits {
+            margin-top: 5px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .credits span {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="launcher-card">
+        <div class="brand">
+            <i class="fa-solid fa-gamepad brand-icon"></i>
+            <h1>Roblox Launcher</h1>
+            <div class="status-badge">
+                <span id="statusDot" class="status-dot"></span>
+                <span id="statusText">System Ready</span>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button id="startButton" class="btn btn-primary" onclick="launchGame()">
+                <i class="fa-solid fa-play"></i> Launch Roblox
+            </button>
+            <button id="webButton" class="btn btn-secondary" onclick="openRobloxWebsite()">
+                <i class="fa-solid fa-globe"></i> Roblox Website
+            </button>
+        </div>
+
+        <div class="credits">
+            Designed by <span>Malek Al Sayyah</span>
+        </div>
+    </div>
+
+    <script>
+        function launchGame() {
+            if (window.chrome && window.chrome.webview) {
+                window.chrome.webview.postMessage("launch_game");
+            }
+        }
+
+        function openRobloxWebsite() {
+            if (window.chrome && window.chrome.webview) {
+                window.chrome.webview.postMessage("open_website");
+            }
+        }
+
+        // Listen for messages from VB.NET backend
+        if (window.chrome && window.chrome.webview) {
+            window.chrome.webview.addEventListener('message', event => {
+                if (event.data === "disable_start") {
+                    const btn = document.getElementById("startButton");
+                    const dot = document.getElementById("statusDot");
+                    const text = document.getElementById("statusText");
+
+                    btn.disabled = true;
+                    btn.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Not Installed';
+                    
+                    dot.classList.add("disabled");
+                    text.innerText = "Executable Not Found";
+                }
+            });
+        }
+    </script>
+</body>
+</html>
