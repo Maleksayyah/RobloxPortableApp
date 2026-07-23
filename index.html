@@ -4,16 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roblox Launcher</title>
-    <!-- FontAwesome for modern icons -->
+    <!-- FontAwesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #00a2ff;
-            --primary-glow: rgba(0, 162, 255, 0.4);
-            --bg-glass: rgba(18, 20, 29, 0.75);
-            --border-glass: rgba(255, 255, 255, 0.12);
+            --primary: #00d2ff;
+            --primary-gradient: linear-gradient(135deg, #00d2ff 0%, #0066ff 100%);
+            --primary-glow: rgba(0, 210, 255, 0.35);
+            --bg-dark: #0f111a;
+            --bg-glass: rgba(22, 26, 42, 0.85);
+            --border-glass: rgba(255, 255, 255, 0.1);
             --text-main: #ffffff;
-            --text-muted: #a0a5b5;
+            --text-muted: #8e95ab;
         }
 
         * {
@@ -25,70 +27,80 @@
         }
 
         body {
-            /* Fallback gradient if background.png is missing */
-            background: linear-gradient(135deg, #090a0f 0%, #171b26 100%);
-            background-image: linear-gradient(rgba(10, 12, 18, 0.7), rgba(10, 12, 18, 0.85)), url('background.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+            background: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 50% 10%, rgba(0, 210, 255, 0.15) 0%, transparent 60%),
+                radial-gradient(circle at 80% 90%, rgba(0, 102, 255, 0.1) 0%, transparent 50%),
+                linear-gradient(180deg, #0f111a 0%, #07080d 100%);
             color: var(--text-main);
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            padding: 20px;
         }
 
-        /* Glassmorphism Central Card Container */
+        /* Mobile Container Card */
         .launcher-card {
             background: var(--bg-glass);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--border-glass);
-            border-radius: 20px;
-            padding: 40px 50px;
-            width: 90%;
-            max-width: 480px;
+            border-radius: 28px;
+            padding: 36px 28px;
+            width: 100%;
+            max-width: 380px;
             text-align: center;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 25px;
-            animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            gap: 30px;
+            animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* Header & Logo styling */
         .brand {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
+        }
+
+        .brand-icon-wrapper {
+            width: 80px;
+            height: 80px;
+            background: rgba(0, 210, 255, 0.08);
+            border: 1px solid rgba(0, 210, 255, 0.2);
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 25px var(--primary-glow);
         }
 
         .brand-icon {
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             color: var(--primary);
-            filter: drop-shadow(0 0 12px var(--primary-glow));
-            margin-bottom: 5px;
         }
 
         .brand h1 {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 700;
             letter-spacing: 0.5px;
-            text-transform: uppercase;
         }
 
         .status-badge {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            font-size: 0.85rem;
+            gap: 8px;
+            font-size: 0.8rem;
+            font-weight: 500;
             color: var(--text-muted);
-            background: rgba(255, 255, 255, 0.05);
-            padding: 4px 12px;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 6px 14px;
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
@@ -97,58 +109,57 @@
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background-color: #2ea44f;
-            box-shadow: 0 0 8px #2ea44f;
+            background-color: #00e676;
+            box-shadow: 0 0 10px #00e676;
         }
 
         .status-dot.disabled {
-            background-color: #ea4e4e;
-            box-shadow: 0 0 8px #ea4e4e;
+            background-color: #ff5252;
+            box-shadow: 0 0 10px #ff5252;
         }
 
-        /* Action Buttons Grid */
         .actions {
             display: flex;
             flex-direction: column;
             width: 100%;
-            gap: 12px;
+            gap: 14px;
         }
 
         .btn {
             width: 100%;
-            padding: 14px 20px;
+            padding: 16px 20px;
             font-size: 0.95rem;
             font-weight: 600;
-            border-radius: 12px;
+            border-radius: 16px;
             border: none;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            transition: all 0.25s ease;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #00a2ff 0%, #0066ff 100%);
+            background: var(--primary-gradient);
             color: #ffffff;
-            box-shadow: 0 4px 20px var(--primary-glow);
+            box-shadow: 0 8px 25px var(--primary-glow);
         }
 
         .btn-primary:hover:not(:disabled) {
             transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(0, 162, 255, 0.6);
+            box-shadow: 0 12px 30px rgba(0, 210, 255, 0.5);
             filter: brightness(1.1);
         }
 
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.05);
             color: var(--text-main);
             border: 1px solid var(--border-glass);
         }
 
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.12);
             transform: translateY(-2px);
         }
 
@@ -157,17 +168,15 @@
         }
 
         .btn:disabled {
-            background: rgba(255, 255, 255, 0.05);
-            color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.03);
+            color: rgba(255, 255, 255, 0.25);
             border: 1px solid transparent;
             cursor: not-allowed;
             box-shadow: none;
         }
 
-        /* Footer Credits */
         .credits {
-            margin-top: 5px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
             letter-spacing: 0.5px;
             text-transform: uppercase;
@@ -178,10 +187,10 @@
             font-weight: 600;
         }
 
-        @keyframes fadeIn {
+        @keyframes slideUp {
             from {
                 opacity: 0;
-                transform: translateY(15px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -194,20 +203,22 @@
 
     <div class="launcher-card">
         <div class="brand">
-            <i class="fa-solid fa-gamepad brand-icon"></i>
+            <div class="brand-icon-wrapper">
+                <i class="fa-solid fa-gamepad brand-icon"></i>
+            </div>
             <h1>Roblox Launcher</h1>
             <div class="status-badge">
                 <span id="statusDot" class="status-dot"></span>
-                <span id="statusText">System Ready</span>
+                <span id="statusText">Ready to Launch</span>
             </div>
         </div>
 
         <div class="actions">
             <button id="startButton" class="btn btn-primary" onclick="launchGame()">
-                <i class="fa-solid fa-play"></i> Launch Roblox
+                <i class="fa-solid fa-play"></i> Launch Game
             </button>
             <button id="webButton" class="btn btn-secondary" onclick="openRobloxWebsite()">
-                <i class="fa-solid fa-globe"></i> Roblox Website
+                <i class="fa-solid fa-globe"></i> Open Roblox Site
             </button>
         </div>
 
@@ -229,7 +240,6 @@
             }
         }
 
-        // Listen for messages from VB.NET backend
         if (window.chrome && window.chrome.webview) {
             window.chrome.webview.addEventListener('message', event => {
                 if (event.data === "disable_start") {
@@ -238,10 +248,10 @@
                     const text = document.getElementById("statusText");
 
                     btn.disabled = true;
-                    btn.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Not Installed';
+                    btn.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Not Found';
                     
                     dot.classList.add("disabled");
-                    text.innerText = "Executable Not Found";
+                    text.innerText = "Executable Missing";
                 }
             });
         }
